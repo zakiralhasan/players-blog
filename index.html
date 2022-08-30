@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports blog</title>
+    <!-- fontawesome link  -->
+    <script src="https://kit.fontawesome.com/59e31b1ee8.js" crossorigin="anonymous"></script>
+    <!-- tailwind link  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- header section  -->
+    <header class="bg-indigo-400 py-8 px-4 text-center mx-auto">
+        <h1 class="text-4xl font-bold my-6">Sprots blog</h1>
+        <div>
+            <!-- input field  -->
+            <input id="input-field" class="px-4 py-1 rounded-md" type="text">
+            <button class="bg-blue-500 px-4 py-1 text-white font-semibold rounded-lg" onclick="searchPlayer()">search</button>
+        </div>
+    </header>
+
+    <!-- main section  -->
+    <main class="bg-gray-300 mx-auto">
+        <section class="w-3/4 mx-auto">
+            <div id="player-info-container" class="grid sm:grid-cols-2 md:grid-cols-3 g-4">
+                  <!-- data gets from js file  -->
+            </div>
+        </section> 
+        <section class="">
+            <div id="player-details-container" class="">
+                  <!-- data gets from js file  -->
+            </div>
+        </section>
+
+    <!-- show all section  -->
+        <section class="flex justify-center ">
+            <button id="view-all-btn" class="bg-gray-500 my-1 px-4 py-1 text-white font-semibold rounded ">View all</button>
+        </section>
+    </main>
+
+    <!-- spin section  -->
+    <section id="loading-display" class="mx-16 my-16 flex justify-center items-center ">
+        <div>
+            <i class="fa-solid fa-circle-notch animate-spin text-2xl text-blue-400"></i><span class="ml-1 text-2xl">Loading...</span>
+        </div>
+    </section>
+
+    <!-- footer section  -->
+    <footer class="bg-black text-white text-center py-8">
+        <p>Copy rights 2022|All rights reserved.</p>
+    </footer>
+    
+
+<!-- scrit section  -->
+    <script src="script.js"></script>
+</body>
+</html>
