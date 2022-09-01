@@ -2,23 +2,38 @@
 const viewAllbutton = document.getElementById('view-all-btn');
 // below line for no image found message
 const noImageMsg = `./images/no-image.png`;
+// below line for getting loading spin section
+const loadingDisplay = document.getElementById('loading-display');
+// below line for getting no result found section
+const noResultFoundSection = document.getElementById('no-result-found');
 /* 
 ---------------------main section start ----------------------------------------
 */
 // this function for get the data from API 
-function displayPlayer(name, showAllValues){
+function displayPlayer(name, dataLimit){
     fetch(`https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${name}`)
     .then(res => res.json())
-    .then(data => setPlayerData(data.player, showAllValues))
+    .then(data => setPlayerData(data.player, dataLimit))
 };
 // this function for manage the data which gets from the API
-function setPlayerData(players, showAllValues){
+function setPlayerData(players, dataLimit){
+    console.log(players.length)
     const playerDetailsContainer = document.getElementById('player-details-container');
     playerDetailsContainer.textContent = '';
+
+    const playerInfoContainer = document.getElementById('player-info-container');
+    playerInfoContainer.innerHTML = '';
+
+    if(!players){
+        playerInfoContainer.innerHTML = '';
+        viewAllbutton.classList.add('hidden');
+        loadingDisplay.classList.add('hidden');
+        return noResultFoundSection.classList.remove('hidden');
+    }else{
+        noResultFoundSection.classList.add('hidden');
+    };
     // this condition section works for data slicing and set class for view all button
-    console.log(players)
-    if(players.length > 9 && showAllValues){ 
-        players = players;
+    if(players.length > 9 && dataLimit){ 
         viewAllbutton.classList.add('hidden');
     }else{
         players = players.slice(0,6);
@@ -29,9 +44,6 @@ function setPlayerData(players, showAllValues){
         };
     };
 
-    const playerInfoContainer = document.getElementById('player-info-container');
-    playerInfoContainer.innerHTML = '';
-    
     for(let player of players){
         // destructuring 'player' object
         const {strThumb, strPlayer, strSport, strNationality} = player;
@@ -51,27 +63,30 @@ function setPlayerData(players, showAllValues){
         playerInfoContainer.appendChild(creatPlayerInfoDiv);  
     };
     // loading end 
-    const loadingDisplay = document.getElementById('loading-display');
-    loadingDisplay.classList.add('hidden');
+    loadingDisplay.classList.add('hidden');  
 };
    
 displayPlayer(''); /* this function called for auto load some data after getting start */ 
 
 // this function for get the data from input field 
-function searchPlayer(showAllValues){
+function searchPlayer(){
     const inputField = document.getElementById('input-field');
     const inputFieldValue = inputField.value;
     inputField.value = '';
-    console.log(typeof inputFieldValue);
     if(inputFieldValue === '' || !isNaN(inputFieldValue)){
         return alert('Please enter players name');
     }else{
-        displayPlayer(inputFieldValue, showAllValues);
+        displayPlayer(inputFieldValue);
     };
     // loading spin strart 
-    const loadingDisplay = document.getElementById('loading-display');
     loadingDisplay.classList.remove('hidden');
 };
+
+document.getElementById('input-field').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        searchPlayer();
+    }
+});
 
 /* 
 ---------------------details section start ----------------------------------------
@@ -121,6 +136,6 @@ function setPlayerDetails(players){
 };
 // this event handler work for view all button 
 viewAllbutton.addEventListener('click', function(){
-        searchPlayer(10);
+        displayPlayer('','dataLimit')
 });
 

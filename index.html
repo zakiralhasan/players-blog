@@ -13,7 +13,7 @@
 <body>
     <!-- header section  -->
     <header class="bg-indigo-400 py-8 px-4 text-center mx-auto">
-        <h1 class="text-4xl font-bold my-6">Sprots blog</h1>
+        <h1 class="text-5xl font-bold my-6">The Sprots Blog</h1>
         <div>
             <!-- input field  -->
             <input id="input-field" class="px-4 py-1 rounded-md" type="text">
@@ -23,12 +23,18 @@
 
     <!-- main section  -->
     <main class="bg-gray-300 mx-auto">
-        <section class="w-3/4 mx-auto">
+        <!-- no result found section  -->
+        <h1 id="no-result-found" class="text-4xl text-center text-red-400">No result found</h1>
+
+        <!-- players info section  -->
+        <section class="w-full md:w-3/4 mx-auto">
             <div id="player-info-container" class="grid sm:grid-cols-2 md:grid-cols-3 g-4">
                   <!-- data gets from js file  -->
             </div>
         </section> 
-        <section class="">
+
+        <!-- players details info section  -->
+        <section class="mx-auto">
             <div id="player-details-container" class="">
                   <!-- data gets from js file  -->
             </div>
@@ -51,7 +57,7 @@
     <footer class="bg-black text-white text-center py-8">
         <p>Copy rights 2022|All rights reserved.</p>
     </footer>
-    
+
 <!-- scrit section  -->
     <script src="script.js"></script>
 </body>
