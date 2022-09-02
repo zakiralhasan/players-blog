@@ -13,17 +13,16 @@ const noResultFoundSection = document.getElementById('no-result-found');
 function displayPlayer(name, dataLimit){
     fetch(`https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${name}`)
     .then(res => res.json())
-    .then(data => setPlayerData(data.player, dataLimit))
+    .then(data => setPlayerData(data.player, dataLimit))   
 };
 // this function for manage the data which gets from the API
 function setPlayerData(players, dataLimit){
-    console.log(players.length)
     const playerDetailsContainer = document.getElementById('player-details-container');
     playerDetailsContainer.textContent = '';
 
     const playerInfoContainer = document.getElementById('player-info-container');
     playerInfoContainer.innerHTML = '';
-
+// this condition works for no result found section 
     if(!players){
         playerInfoContainer.innerHTML = '';
         viewAllbutton.classList.add('hidden');
@@ -32,6 +31,7 @@ function setPlayerData(players, dataLimit){
     }else{
         noResultFoundSection.classList.add('hidden');
     };
+    console.log(players.length)
     // this condition section works for data slicing and set class for view all button
     if(players.length > 9 && dataLimit){ 
         viewAllbutton.classList.add('hidden');
@@ -81,11 +81,11 @@ function searchPlayer(){
     // loading spin strart 
     loadingDisplay.classList.remove('hidden');
 };
-
+// below event handler works for input field when pressed the 'Enter' button 
 document.getElementById('input-field').addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         searchPlayer();
-    }
+    };
 });
 
 /* 
@@ -136,6 +136,5 @@ function setPlayerDetails(players){
 };
 // this event handler work for view all button 
 viewAllbutton.addEventListener('click', function(){
-        displayPlayer('','dataLimit')
+    displayPlayer('','dataLimit')
 });
-
