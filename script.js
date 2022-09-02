@@ -10,13 +10,13 @@ const noResultFoundSection = document.getElementById('no-result-found');
 ---------------------main section start ----------------------------------------
 */
 // this function for get the data from API 
-function displayPlayer(name, dataLimit){
+const displayPlayer = (name, dataLimit) => {
     fetch(`https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${name}`)
     .then(res => res.json())
     .then(data => setPlayerData(data.player, dataLimit))   
 };
 // this function for manage the data which gets from the API
-function setPlayerData(players, dataLimit){
+const setPlayerData = (players, dataLimit) => {
     const playerDetailsContainer = document.getElementById('player-details-container');
     playerDetailsContainer.textContent = '';
 
@@ -69,7 +69,7 @@ function setPlayerData(players, dataLimit){
 displayPlayer(''); /* this function called for auto load some data after getting start */ 
 
 // this function for get the data from input field 
-function searchPlayer(){
+const searchPlayer = () => {
     const inputField = document.getElementById('input-field');
     const inputFieldValue = inputField.value;
     inputField.value = '';
@@ -92,13 +92,13 @@ document.getElementById('input-field').addEventListener('keypress', function (ev
 ---------------------details section start ----------------------------------------
 */
 // this function for get the details data from the API
-function displayPlayerDetails(details){
+const displayPlayerDetails = (details) => {
     fetch(`https://www.thesportsdb.com/api/v1/json/2/lookupplayer.php?id=${details}`)
     .then(res => res.json())
     .then(data => setPlayerDetails(data.players[0]))
 };
 // this function for view details working section 
-function setPlayerDetails(players){
+const setPlayerDetails =(players) => {
     viewAllbutton.classList.add('hidden');
     // destructuring 'players' object 
     const {strThumb, strPlayer, strSport, strNationality, dateBorn, strBirthLocation, strGender, strHeight, strWeight, strDescriptionEN} = players;
